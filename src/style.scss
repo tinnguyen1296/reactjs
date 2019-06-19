@@ -1,5 +1,28 @@
 @import './variables.scss';
 
-div {
-  color: $color;
+div, p, a {
+  color: $primary-color;
+}
+
+a.btn-edit {
+  color: #17a2b8!important;
+  opacity: 0.2;
+}
+
+a.btn-del {
+  color: #dc3545!important;
+  opacity: 0.2;
+}
+
+div.table-todoitems tr:hover {
+  a.btn-del, a.btn-edit {
+    opacity: 1;
+    transition: 1s;
+  }
+}
+
+.table-todoitems tr.done {
+  a.btn-del, a.btn-edit {
+    opacity: 1;
+  }
 }

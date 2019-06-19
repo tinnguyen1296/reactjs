@@ -1,62 +1,57 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React, { Component } from 'react';
 import './style.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import TodoItem from './TodoItem';
 
 export default class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoList: [
-        { name: 'aaa', isDone: true},
-        { name: 'bbb'},
-        { name: 'ccc'},
+      todoItems: [
+        { content: 'aaa', isDone: true},
+        { content: 'bbb'},
+        { content: 'ccc'},
       ]
     }
   }
 
-  handleChange() {
-    // const { todoList } = this.state;
-    
+  handleChange(item) {
+    console.log(item);
+    const isDone = item.isDone;
+    const { todoItems } = this.state;
+    const index = todoItems.indexOf(item);
+    this.setState({
+      todoItems: [
+        ...todoItems.slice(0, index),
+        { ...item, isDone: !isDone },
+        ...todoItems.slice(index + 1),
+      ]
+    })
   }
 
   render() {
-    const { todoList } = this.state;
+    const { todoItems } = this.state;
     return (
       <div>
         <div className="header">
           <h4>Todo</h4>
         </div>
         <div className="content">
-          <div className="table">
+          <div className="table table-todoitems">
             <table>
               <tbody>
-                {todoList.map((item, i) => (
-                  <tr
-                    onClick={this.handleChange}
-                    className={(item.isDone) ? 'done' : ''}
-                  >
-                    <td><div class="checkbox">
-                      <input id="checkbox0" type="checkbox" />
-                      <label for="checkbox0">
-                        </label>
-                        </div>
-                    </td>
-                    <td>{item.name}</td>
-                    <td class="td-actions text-right">
-                      <button type="button" class="btn-simple btn btn-xs btn-info">
-                        <FontAwesomeIcon icon="edit" size="xs" />
-                      </button>                     
-                      <button type="button" class="btn-simple btn btn-xs btn-danger">
-                        <FontAwesomeIcon icon="times" size="xs" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                { todoItems.length > 0 && todoItems.map((item, index) =>
+                  <TodoItem
+                    onClick = {() => this.handleChange(item)}
+                    isDone = {item.isDone}
+                    content = {item.content}
+                    index = {index}
+                  />
+                )}
               </tbody>
             </table>
           </div>
-          
+
 
         </div>
       </div>
