@@ -4,6 +4,10 @@ div, p, a {
   color: $primary-color;
 }
 
+.hidden {
+  display: none;
+}
+
 a.btn-edit {
   color: #17a2b8!important;
   opacity: 0.2;
@@ -14,15 +18,47 @@ a.btn-del {
   opacity: 0.2;
 }
 
-div.table-todoitems tr:hover {
-  a.btn-del, a.btn-edit {
-    opacity: 1;
-    transition: 1s;
+.wrapper-todolist {
+  display: inline-block;
+  .footer {
+    > div {
+      cursor: pointer;
+    }
   }
 }
 
-.table-todoitems tr.done {
-  a.btn-del, a.btn-edit {
-    opacity: 1;
+.table-todoitems {
+  tr {
+    :hover {
+      a.btn-del, a.btn-edit {
+        opacity: 1;
+        transition: 1s;
+      }
+    }
+    .checkbox {
+      cursor: pointer;
+      .uncheck {
+      display: block;
+      }
+      .check {
+        display: none;
+      }
+    }
+  }
+
+  tr.done {
+    label {
+    opacity: 0.4;
+    }
+    a.btn-del, a.btn-edit {
+      opacity: 1;
+    }
+    .uncheck {
+      display: none!important;
+    }
+    .check {
+      transition: color .2s linear;
+      display: block!important;
+    }
   }
 }
