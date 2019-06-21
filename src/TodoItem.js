@@ -21,6 +21,11 @@ export default class TodoItem extends Component {
     this.props.isEdit(e, this.props.id, text);
   }
 
+  handleDeleteItem(id) {
+    // console.log(id);
+    return this.props.handleDelete(id);
+  }
+
   render() {
     const { onClick, isDone, content, id, isDel } = this.props;
     const { isChange, text } = this.state;
@@ -82,7 +87,7 @@ export default class TodoItem extends Component {
           </a>
         </td>
         <td className="td-actions text-right">
-          <a className="btn-del" onClick={() => isDel(id)}>
+          <a className="btn-del" onClick={() => this.handleDeleteItem(id)}>
             <FontAwesomeIcon icon="times" size="xs" />
           </a>
         </td>

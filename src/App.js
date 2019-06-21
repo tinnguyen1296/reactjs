@@ -5,14 +5,15 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
 import Header from './common/Header';
-import TodoList from './TodoList';
+import Todo from './Todo';
+
 library.add(fab, fas, far);
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <TodoList />
+      <Todo />
     </div>
   );
 }
