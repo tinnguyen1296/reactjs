@@ -35,7 +35,7 @@ export default class Todo extends Component {
     })
   }
 
-  handleSubmit = (e, text) => {
+  onAdd = (e, text) => {
     e.preventDefault();
     const { data } = this.state;
     if (!text.length) {
@@ -51,66 +51,50 @@ export default class Todo extends Component {
         ...data,
         newItem
       ],
-      displayedSearch: [],
-      text: ''
+      displayedSearch: []
     });
+    return true;
   }
 
-  isDelete(id) {
-    console.log(id);
-    // const { data } = this.state;
-    // const item = data.find(item => item.id === id);
-    // const index = data.indexOf(item);
+  onDelete = id => {
+    const { data } = this.state;
+    const item = data.find(item => item.id === id);
+    const index = data.indexOf(item);
 
-    // this.setState({
-    //   data: [
-    //     ...data.slice(0, index),
-    //     ...data.slice(index + 1)
-    //   ],
-    //   displayedSearch: [],
-    // })
+    this.setState({
+      data: [
+        ...data.slice(0, index),
+        ...data.slice(index + 1)
+      ],
+      displayedSearch: [],
+    })
   }
 
-  // isEdit(e, id, contentIsChanged) {
-  //   e.preventDefault();
-  //   const { data } = this.state;
-  //   const item = data.find(item => item.id === id);
-  //   const index = data.indexOf(item);
-  //   item.content = contentIsChanged;
-  //   console.log(...data.slice(0, index), item, ...data.slice(index + 1));
-  //   this.setState({
-  //     data: [
-  //       ...data.slice(0, index),
-  //       item,
-  //       ...data .slice(index + 1)
-  //     ],
-  //     displayedSearch: [],
-  //   })
-  // }
-
-  // handleSearch(e) {
-  //   const { todoItems } = this.state;
-  //   let search = e.target.value.toLowerCase();
-  //   this.setState({
-  //     search: search
-  //   })
-  //   let displayedSearch = todoItems.filter(item => {
-  //     let searchValue = item.content.toLowerCase();
-  //     return searchValue.indexOf(search) === 0;
-  //   })
-
-  //   this.setState({
-  //     displayedSearch: displayedSearch
-  //   })
-  // }
+  onEdit = (e, id, contentIsChanged) => {
+    e.preventDefault();
+    const { data } = this.state;
+    const item = data.find(item => item.id === id);
+    const index = data.indexOf(item);
+    item.content = contentIsChanged;
+    console.log(...data.slice(0, index), item, ...data.slice(index + 1));
+    this.setState({
+      data: [
+        ...data.slice(0, index),
+        item,
+        ...data .slice(index + 1)
+      ],
+      displayedSearch: [],
+    })
+  }
 
   render() {
     return (
       <TodoList 
         data={this.state.data}
         handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        isDelete={this.isDelete}
+        onAdd={this.onAdd}
+        onDelete={this.onDelete}
+        onEdit={this.onEdit}
       />
     )
   }

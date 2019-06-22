@@ -29,7 +29,7 @@ a.btn-del {
 
 .table-todoitems {
   tr {
-    :hover {
+    &:hover {
       a.btn-del, a.btn-edit {
         opacity: 1;
         transition: 1s;

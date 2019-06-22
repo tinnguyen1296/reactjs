@@ -15,15 +15,15 @@ export default class TodoItem extends Component {
   }
 
   handleSubmit(e) {
-    const { isChange, text } = this.state;
-    
-    isChange = false;
-    this.props.isEdit(e, this.props.id, text);
+    let { text } = this.state;
+    this.setState({
+      isChange: false,
+    })
+    this.props.handleEdit(e, this.props.id, text);
   }
 
-  handleDeleteItem(id) {
-    // console.log(id);
-    return this.props.handleDelete(id);
+  handleDeleteItem = () => {
+    return this.props.handleDelete(this.props.id);
   }
 
   render() {
@@ -35,9 +35,9 @@ export default class TodoItem extends Component {
       displayContent = <form onSubmit={(e) => this.handleSubmit(e) }>
         <input 
           type="text" 
-          onChange={(e) => this.handleInput(e)} 
+          onChange={(e) => this.handleInput(e)}
           value={text}
-          onClick= {() => onmouseup =() => this.setState({ isChange: !isChange})}
+          onClick= {() => onmouseup = () => this.setState({ isChange: !isChange})}
           />
       </form>
     }
@@ -87,7 +87,7 @@ export default class TodoItem extends Component {
           </a>
         </td>
         <td className="td-actions text-right">
-          <a className="btn-del" onClick={() => this.handleDeleteItem(id)}>
+          <a className="btn-del" onClick={this.handleDeleteItem}>
             <FontAwesomeIcon icon="times" size="xs" />
           </a>
         </td>

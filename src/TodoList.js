@@ -14,6 +14,7 @@ export default class TodoList extends Component {
       isShowingActive: false,
       isShowAll: true,
     }
+    // this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleInput(e) {
@@ -25,28 +26,38 @@ export default class TodoList extends Component {
   }
 
   handleSubmit(e) {
-    return this.props.handleSubmit(e, this.state.text);
+    const result = this.props.onAdd(e, this.state.text);
+    if (result) {
+      this.setState({
+        text: ''
+      })
+    }
   }
 
-  handleDelete(id) {
-    console.log(id);
-    return this.props.isDelete(id);
+  handleDelete = id => {
+    return this.props.onDelete(id);
   }
 
-  handleEdit(id) {
-    return this.props.isEdit(id);
+  handleEdit = (e, id, text) => {
+    return this.props.onEdit(e, id, text);
+  }
+
+  handleSearch(e) {
+    let search = e.target.value.toLowerCase();
+    this.setState({
+      search: search
+    })
   }
 
   render() {
-    const { todoItems, isShowingActive, isShowAll, text, search } = this.state;
-    let { displayedSearch } = this.state;
-    const { data, handleChange, handleSubmit } = this.props;
-
-    // if (!displayedSearch.length > 0) {
-    //   displayedSearch = [...todoItems];
-    // }
+    const { isShowingActive, isShowAll, text, search } = this.state;
+    const { data, handleChange } = this.props;
 
     const displayedItemsRender = data.filter(item => {
+      if(search.length > 0) {
+        let searchValue = item.content.toLowerCase();
+        return searchValue.indexOf(search) === 0;
+      }
       if (isShowAll) {
         return item;
       }
@@ -62,10 +73,11 @@ export default class TodoList extends Component {
           <div className="footer mw-100 d-flex justify-content-between">
             <div onClick={() => this.setState({ isShowAll: true })}>All</div>
             <div>
-                {/* <input 
-                  onChange={(e) => handleSearch(e)}
+                <input 
+                  onChange={(e) => this.handleSearch(e)}
+                  placeholder="Search..."
                   value={search}
-                /> */}
+                />
             </div>
             <div onClick={() => this.setState({
               isShowingActive: !isShowingActive,
@@ -84,8 +96,8 @@ export default class TodoList extends Component {
                     content = {item.content}
                     id = {item.id}
                     key = {item.id}
-                    handleDelete={() => this.handleDelete()}
-                    isEdit={() => this.isEdit()}
+                    handleDelete={this.handleDelete}
+                    handleEdit={this.handleEdit}
                   />
                 )}
                 {!displayedItemsRender.length && 'No item'}
@@ -105,7 +117,7 @@ export default class TodoList extends Component {
                 value={text}
               />
               <button>
-                Add #{todoItems.length + 1}
+                Add #{data.length + 1}
               </button>
             </div>
           </form>
