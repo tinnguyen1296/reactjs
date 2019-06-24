@@ -17,6 +17,7 @@ export default class Todo extends Component {
       isShowingActive: false,
       isShowAll: true,
     }
+    
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.isDelete = this.isDelete.bind(this);
     // this.isEdit = this.isEdit.bind(this);
