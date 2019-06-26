@@ -5,35 +5,38 @@ export default class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      data: {
+        products: [],
+        pageRangeDisplayed: '',
+        activePage: '',
+        totalProductCount: '',
+      }
     }
-    
   }
 
-  getProducts = async () => {
-    return await fetch('http://localhost:5000/api/products')
+  getProducts = (numberPage) => {
+    let url = 'http://localhost:5000/api/products';
+    
+    return fetch(`${url}?page=${numberPage}`)
       .then(response => response.json())
-      .then(myJson => {
-        return JSON.stringify(myJson);
+      .then(res => {
+        console.log(res);
+        this.setState({
+          data: res.data
+        })
       })
       .catch(error => console.error(error))
   }
 
-  componentWillMount() {
-    this.getProducts().then(res => {
-      const arr = JSON.parse(res);
-      console.log(arr);
-      this.setState({
-        products: arr.data
-      })
-    }).catch();
+  componentDidMount() {
+    this.getProducts();
   }
 
   render() {
-    console.log(this.state.products)
+    
     return (
       <div>
-        {/* <ProductList products={this.state.products.data} /> */}
+        <ProductList data={this.state.data} getProducts={this.getProducts} />
       </div>
     )
   }

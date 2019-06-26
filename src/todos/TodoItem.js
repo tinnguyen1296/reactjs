@@ -37,7 +37,7 @@ export default class TodoItem extends Component {
           type="text" 
           onChange={(e) => this.handleInput(e)}
           value={text}
-          onClick= {() => onmouseup = () => this.setState({ isChange: !isChange})}
+          onClick= {() => this.setState({ isChange: !isChange})}
           />
       </form>
     }
@@ -62,13 +62,13 @@ export default class TodoItem extends Component {
             >
               <FontAwesomeIcon
                 className="uncheck"
-                icon={['far', 'circle']}
+                icon={['fas', 'circle']}
                 size="lg"
                 color="#ddd"
               />
               <FontAwesomeIcon
                 className="check"
-                icon={['far', 'check-circle']}
+                icon={['fas', 'check-circle']}
                 size="lg"
                 color="#1dc7ea"
               />
