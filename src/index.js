@@ -5,18 +5,22 @@ import './index.css';
 import App from './App';
 import Products from './products/Product';
 import Todo from './todos/Todo';
+
+import { CartProvider } from './components/Cart';
 import * as serviceWorker from './serviceWorker';
 
 
 
 const routing = (
-  <Router>
-    <div>
-      <Route path="/" component={App} />
-      <Route path="/products" component={Products} />
-      <Route path="/todos" component={Todo} />
-    </div>
-  </Router>
+  <CartProvider>
+    <Router>
+      <div>
+        <Route path="/" component={App} />
+        <Route path="/products" component={Products} />
+        <Route path="/todos" component={Todo} />
+      </div>
+    </Router>
+  </CartProvider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));
