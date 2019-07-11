@@ -1,11 +1,13 @@
 import React from 'react';
 import logo from '../logo.svg';
 import '../App.scss';
+import { CartContext } from '../modules/products/cart/Cart';
 
 class Header extends React.Component {
-  
+
   render() {
     return (
+
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div className="container">
           <a className="navbar-brand" href="#">
@@ -21,14 +23,21 @@ class Header extends React.Component {
                 <span className="sr-only">(current)</span>
                   </a>
                 </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">About</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">About</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href="#">Services</a>
+                  <a className="nav-link" href="#">Services</a>
                 </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Contact</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Contact</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/cart">
+                    <CartContext.Consumer>
+                      { ({items}) => `Cart (${items.length})`}
+                    </CartContext.Consumer>
+                  </a>
                 </li>
               </ul>
             </div>

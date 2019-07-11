@@ -3,20 +3,28 @@ import ReactDOM from 'react-dom';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
+
 import Products from './modules/products/Product';
 import Todo from './modules/todos/Todo';
+import CartList from './modules/products/cart/CartList';
+
+import { CartProvider } from './modules/products/cart/Cart';
+
 import * as serviceWorker from './serviceWorker';
 
 
 
 const routing = (
-  <Router>
-    <div>
-      <Route path="/" component={App} />
-      <Route path="/products" component={Products} />
-      <Route path="/todos" component={Todo} />
-    </div>
-  </Router>
+  <CartProvider>
+    <Router>
+      <div>
+        <Route path="/" component={App} />
+        <Route path="/products" component={Products} />
+        <Route path="/todos" component={Todo} />
+        <Route path="/cart" component={CartList} />
+      </div>
+    </Router>
+  </CartProvider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

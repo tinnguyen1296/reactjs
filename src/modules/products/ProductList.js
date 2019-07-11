@@ -1,6 +1,4 @@
 import React, { Component} from "react";
-import { faSuperpowers } from "@fortawesome/free-brands-svg-icons";
-import Pagination from "react-js-pagination";
 
 import ProductItem from "./ProductItem";
 import PaginationProduct from "./PaginationProduct";
@@ -16,7 +14,7 @@ export default class ProductList extends Component {
   }
 
   render() {
-    
+
     let { products, pageRangeDisplayed, activePage, totalProductCount } = this.props.data;
 
     return (
@@ -24,14 +22,12 @@ export default class ProductList extends Component {
         <h1>Products</h1>
         <div className="container">
           <div className="row">
-            { products.length > 0 && products.map( (product,index) => 
-              <ProductItem 
-                name={product.name}
-                image={product.image}
-                email={product.email} />
+            { products.length > 0 && products.map( (product,index) =>
+              <ProductItem
+                product={product} />
             )}
           </div>
-          <PaginationProduct 
+          <PaginationProduct
             activePage={activePage}
             pageRangeDisplayed={pageRangeDisplayed}
             totalProductCount={totalProductCount}

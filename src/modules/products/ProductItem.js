@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
+import { CartContext } from './cart/Cart';
 
 class ProductItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {  }
-  }
-  render() { 
-    return ( 
+  render() {
+    const { image, name, price } = this.props.product;
+    return (
       <div className="col-4 d-flex flex-column align-items-center">
         <div className="img">
-          <img src={ this.props.image } alt="" />
+          <img src={ image } alt="" />
         </div>
         <div className="title">
-          <h3>{this.props.name}</h3>
+          <h3>{name}</h3>
         </div>
 
-        <div className="email">
-          <p>{this.props.email}</p>
+        <div className="price">
+          <p>{price}</p>
         </div>
+        <CartContext.Consumer>
+          { ({addToCart}) => <button onClick={() => addToCart(this.props.product)}>Add to Cart</button>}
+        </CartContext.Consumer>
       </div>
     );
   }
 }
- 
+
 export default ProductItem;

@@ -27,36 +27,36 @@ export default class TodoItem extends Component {
   }
 
   render() {
-    const { onClick, isDone, content, id, isDel } = this.props;
+    const { onClick, isDone, content, id } = this.props;
     const { isChange, text } = this.state;
 
     let displayContent = <div>{content}</div>;
     if (isChange) {
       displayContent = <form onSubmit={(e) => this.handleSubmit(e) }>
-        <input 
-          type="text" 
+        <input
+          type="text"
           onChange={(e) => this.handleInput(e)}
           value={text}
           onClick= {() => this.setState({ isChange: !isChange})}
           />
       </form>
     }
-    
+
     return (
       <tr
         className={(isDone) ? 'done' : ''}
       >
         <td>
           <div className="checkbox">
-            <input 
-              id={"checkbox_" + id } 
+            <input
+              id={"checkbox_" + id }
               type="text"
               name="checkbox"
               value={(isDone) ? true : false}
-              className="hidden" 
+              className="hidden"
             />
-            <div 
-              onClick={onClick} 
+            <div
+              onClick={onClick}
               htmlFor={"checkbox_" + id}
               className="btn-checkbox"
             >
@@ -72,7 +72,7 @@ export default class TodoItem extends Component {
                 size="lg"
                 color="#1dc7ea"
               />
-            </div>  
+            </div>
           </div>
         </td>
         <td>
