@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import Products from './products/Product';
-import Todo from './todos/Todo';
+import Products from './modules/products/Product';
+import Todo from './modules/todos/Todo';
 import * as serviceWorker from './serviceWorker';
 
 

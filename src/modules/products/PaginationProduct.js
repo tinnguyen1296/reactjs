@@ -20,6 +20,8 @@ class PaginationProduct extends Component {
     let j = activePage;
     if (activePage > Math.floor(pageRangeDisplayed / 2)) {
       j = activePage - Math.floor(pageRangeDisplayed / 2);
+    } else if(j !== 1) {
+      j = activePage - 1;
     }
     
     for (let i = j; i < pageRangeDisplayed + j; i++) {
