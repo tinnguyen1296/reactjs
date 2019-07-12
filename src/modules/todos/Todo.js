@@ -91,7 +91,7 @@ export default class Todo extends Component {
       data: [
         ...data.slice(0, index),
         item,
-        ...data .slice(index + 1)
+        ...data.slice(index + 1)
       ],
       displayedSearch: [],
     })

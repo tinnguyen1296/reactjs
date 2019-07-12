@@ -9,12 +9,12 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <List data={data} render={item => <div>{item}</div>} />
+      {/* <List data={data} render={item => <div>{item}</div>} />
       <Counter timer={1000} maxValue={10000}>
         { count =>
           <h1>{count}</h1>
         }
-      </Counter>
+      </Counter> */}
     </div>
   );
 }

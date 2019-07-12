@@ -20,7 +20,6 @@ export class CartProvider extends Component {
         totalPrice += item.price * item.quantity;
         console.log('loop', totalPrice);
       });
-      console.log(totalPrice);
       this.setState({ items: cart, total: totalPrice });
     }
   }
@@ -36,7 +35,7 @@ export class CartProvider extends Component {
           items: [...this.state.items, item],
           total: this.state.total + item.price,  
         },
-        () => Cookies.set("cart", this.state.items)
+        () => Cookies.set("cart", this.state.items, { expires: 1 })
       );
     } else {
       this.setState({
@@ -47,7 +46,45 @@ export class CartProvider extends Component {
         ),
         total: this.state.total + item.price
       },
-      () => Cookies.set("cart", this.state.items)
+        () => Cookies.set("cart", this.state.items, { expires: 1 })
+      )
+    }
+  }
+
+  increaseQuantity = (id) => {
+    let { items } = this.state;
+
+    const findItems = items.find(i => i.id === id);
+    const index = items.indexOf(findItems);
+    if(findItems) {
+      this.setState({
+        items: [
+          ...items.slice(0, index),
+          { ...findItems, quantity: findItems.quantity + 1},
+          ...items.slice(index + 1),
+        ],
+        total: this.state.total + findItems.price
+      },
+        () => Cookies.set("cart", this.state.items, { expires: 1 })
+      )
+    }
+  }
+
+  decreaseQuantity = (id) => {
+    let { items } = this.state;
+
+    const findItems = items.find(i => i.id === id);
+    const index = items.indexOf(findItems);
+    if (findItems) {
+      this.setState({
+        items: [
+          ...items.slice(0, index),
+          { ...findItems, quantity: findItems.quantity - 1 },
+          ...items.slice(index + 1),
+        ],
+        total: this.state.total - findItems.price
+      },
+        () => Cookies.set("cart", this.state.items, { expires: 1 })
       )
     }
   }
@@ -56,9 +93,10 @@ export class CartProvider extends Component {
     const cart = {
       items: this.state.items,
       addToCart: this.addItem,
-      total: this.state.total
+      total: this.state.total,
+      decreaseQuantity: this.decreaseQuantity,
+      increaseQuantity: this.increaseQuantity,
     }
-    console.log(cart.total);
     return <CartContext.Provider value={cart} >
         {this.props.children}
       </CartContext.Provider>

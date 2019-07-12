@@ -1,7 +1,8 @@
-import React from 'react';
-import logo from '../logo.svg';
-import '../App.scss';
-import { CartContext } from '../modules/products/cart/Cart';
+import React from 'react'
+import logo from '../logo.svg'
+import '../App.scss'
+import { CartContext } from '../modules/products/cart/Cart'
+import { Link } from 'react-router-dom'
 
 class Header extends React.Component {
 
@@ -10,34 +11,31 @@ class Header extends React.Component {
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             <img src={logo} className="App-logo" alt="logo" />
-          </a>
+          </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item active">
-                  <a className="nav-link" href="#">Home
+                  <Link className="nav-link" to="/">Home
                 <span className="sr-only">(current)</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">About</a>
+                  <Link className="nav-link" to="/products">Products</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Services</a>
+                  <Link className="nav-link" to="/todos">Todos</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Contact</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/cart">
+                  <Link className="nav-link" to="/cart">
                     <CartContext.Consumer>
                       { ({items}) => `Cart (${items.length})`}
                     </CartContext.Consumer>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

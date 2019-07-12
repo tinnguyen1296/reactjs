@@ -7,6 +7,8 @@ import App from './App';
 import Products from './modules/products/Product';
 import Todo from './modules/todos/Todo';
 import CartList from './modules/products/cart/CartList';
+import Checkout from './modules/products/checkout/Checkout';
+import Login from './modules/account/Login';
 
 import { CartProvider } from './modules/products/cart/Cart';
 
@@ -22,6 +24,8 @@ const routing = (
         <Route path="/products" component={Products} />
         <Route path="/todos" component={Todo} />
         <Route path="/cart" component={CartList} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/login" component={Login} />
       </div>
     </Router>
   </CartProvider>
